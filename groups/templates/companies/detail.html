@@ -4,6 +4,81 @@
 {% block title %}{{ headline }} | {{ block.super }}{% endblock %}
 
 {% block content %}
+    <div class="grid1_of_3">
+				<div class="btn_style bg3">
+				<h4>download</h4>
+			</div>
+			<div class="chart">
+			<canvas id="canvas" height="250" width="295" style="margin-top: 30px;"></canvas>
+				<script>
+						var lineChartData = {
+						labels : ["January","February","March","April","May","June","July"],
+						datasets : [
+							{
+								fillColor : "rgba(220,220,220,0.5)",
+								strokeColor : "rgba(220,220,220,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#fff",
+								data : [65,59,90,81,56,55,40]
+							},
+							{
+								fillColor : "rgba(151,187,205,0.5)",
+								strokeColor : "rgba(151,187,205,1)",
+								pointColor : "rgba(151,187,205,1)",
+								pointStrokeColor : "#fff",
+								data : [28,48,40,19,96,27,100]
+							}
+						]
+
+					}
+
+				var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+
+				</script>
+			</div>
+		</div>
+		<div class="grid1_of_3 left">
+			<div class="btn_style bg3">
+				<h4>download</h4>
+			</div>
+			<div class="loader_main">
+					<div class="outc c">
+					  <small class="c a"></small>
+					  <small class="c b"></small>
+					  <small class="c d"></small>
+					  <small class="c e"></small>
+					  <div class="spinner">
+					  <div class="spinner-inner"></div>
+					  <div class="spinner-mask"></div>
+					  <div class="spinner-mask-two"></div>
+					</div>
+					  <div class="innerc c"><img src="images/loader.png" alt=""/>  </div>
+					</div>
+				<div class="loader_top">
+					<span>52%</span>
+					<p>complete...</p>
+				<div class="clear"></div>
+			</div>
+			</div>
+		</div>
+		<div class="grid1_of_3 left">
+			<div class="btn_style bg4">
+				<h4>location</h4>
+			</div>
+			<div class="locate">
+				<a href="#"><p class="new">san francisco</p></a>
+				<a href="#"><span class="mark"></span></a>
+				<div class="clear"></div>
+			</div>
+			<div class="buttons">
+				<button class="bg1">Button</button>
+				<button class="bg2">Button</button>
+				<button class="bg3">Button</button>
+				<button class="bg4">Button</button>
+			</div>
+		</div>
+	<div class="clear"></div>
+
     <div class="container pt">
         <div class="row">
             <div class="col-md-6">
