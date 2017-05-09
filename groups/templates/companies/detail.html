@@ -9,79 +9,89 @@
             padding-top: 0;
             margin-top: 6%;
         }
-    .grid1_of_3{
-         width: 45%;
+        .grid1_of_3{
+             width: 45%;
+            margin-left:3%;
+         }
+    .grid1_of_3 p{
+        font-size: medium;
+    }
+    .soc_icons form label{
+        color:white;
+    }
+    #id_email_or_username{
+        padding: 0 15px;
+        font-weight: 500;
+        font-family: 'Open Sans', sans-serif;
+        color:black;
+        font-size: 1em;
+        /*background: rgba(255, 255, 255, 0.15);*/
+        outline: none;
+        border: none;
+        -webkit-appearance: none;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -o-border-radius: 10px;
+        box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.28);
+        -webkit-box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.28);
+        -moz-box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.28);
+        -o-box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.28);
+    }
+    .soc_icons form button{
+        margin-left:33em;
+        margin-top: 1em;
+    }
+    .left{
+        float:left;
         margin-left:3%;
-     }
+    }
+    .mem{
+        float:right;
+    }
+    .grids_of_3{
+        margin-top: 3%;
+    }
     </style>
-    <div class="grid1_of_3">
-				<div class="btn_style bg3">
-				<h4>download</h4>
+    <div class="grids_of_3 row">
+		<div class="grid1_of_3">
+			<div class="btn_style bg1">
+				<h4>{{ object.name }}</h4>
 			</div>
+			<div class="login_form">
+                <p>{{ object.description|linebreaks }}</p>
+				{% if user == object.created_by %}
+                    <a href="{% url 'groups:companies:update' slug=object.slug %}" class="btn btn-primary pull-right">Edit</a>
+                <hr>
+            </div>
+            <div class="soc_icons">
+                    <h4> Invite Someone! </h4>
+                    <form action="" method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_field form.email_or_username layout='horizontal' %}
+    {#                        <input type="submit" value="Invite!" class="btn btn-primary center-block">#}
+                            <button type="submit" class="btn btn-primary" Value="Invite">Invite!</button>
+                    </form>
+            </div>
+                 {% else %}
+                    <a href="{% url 'groups:companies:leave' slug=object.slug %}" class="btn btn-danger pull-right">Leave</a>
+                    <hr></div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                {% endif %}
 
-			</div>
-		</div>
-		<div class="grid1_of_3 left">
-			<div class="btn_style bg2">
-				<h4>download</h4>
-			</div>
-			<div class="loader_main">
-					<div class="outc c">
-					  <small class="c a"></small>
-					  <small class="c b"></small>
-					  <small class="c d"></small>
-					  <small class="c e"></small>
-					  <div class="spinner">
-					  <div class="spinner-inner"></div>
-					  <div class="spinner-mask"></div>
-					  <div class="spinner-mask-two"></div>
-					</div>
-					  <div class="innerc c"><img src="images/loader.png" alt=""/>  </div>
-					</div>
-				<div class="loader_top">
-					<span>52%</span>
-					<p>complete...</p>
-				<div class="clear"></div>
-			</div>
-			</div>
-		</div>
-		<div class="grid1_of_3 left">
-			<div class="btn_style bg4">
-				<h4>location</h4>
-			</div>
-			<div class="locate">
-				<a href="#"><p class="new">san francisco</p></a>
-				<a href="#"><span class="mark"></span></a>
-				<div class="clear"></div>
-			</div>
-			<div class="buttons">
-				<button class="bg1">Button</button>
-				<button class="bg2">Button</button>
-				<button class="bg3">Button</button>
-				<button class="bg4">Button</button>
-			</div>
-		</div>
 	<div class="clear"></div>
-
-    <div class="container pt">
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3>{{ object.name }}</h3>
-                {{ object.description|linebreaks }}
-                {% if user == object.created_by %}
-                    <hr>
-                    <a href="{% url 'groups:companies:update' slug=object.slug %}" class="btn btn-default">Edit</a>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        {% bootstrap_field form.email_or_username layout='horizontal' %}
-                        <input type="submit" value="Invite!" class="btn btn-default">
-                    </form>
-                {% else %}
-                    <a href="{% url 'groups:companies:leave' slug=object.slug %}" class="btn btn-danger">Leave</a>
-                {% endif %}
-            </div>
-            <div class="col-md-6">
-                <h4>Members</h4>
+                <h4 style="color: white">Members</h4>
                 <div class="list-group">
                     {% for member in object.members.all %}
                         <a href="#" class="list-group-item">
@@ -93,4 +103,11 @@
             </div>
         </div>
     </div>
+    <div class="container">&nbsp;</div>
+    <div class="container">&nbsp;</div>
+    <div class="container">&nbsp;</div>
+    <div class="container">&nbsp;</div>
+    <div class="container">&nbsp;</div>
+    	<div class="clear"></div>
+
 {% endblock %}

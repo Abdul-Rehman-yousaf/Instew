@@ -54,15 +54,16 @@
 			<div class="btn_style bg1">
 				<h4>Create New Family</h4>
 			</div>
-            {% block css %}
-
-            {% endblock %}
 			<form action="" method="POST" class="login_form">
                     {% bootstrap_form form %}
                     {% csrf_token %}
+                    {% if object %}
+                    <input type="submit" value="Save" class="pull-right btn btn-primary btn-lg">
+                    {% else %}
                     <input type="submit" value="Create" class="pull-right btn btn-primary btn-lg">
-                <br>
-                </form>
+                    {% endif %}
+                    <br>
+            </form>
 		</div>
     </div>
         <div class="grid1_of_3 left">

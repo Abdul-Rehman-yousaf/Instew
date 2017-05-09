@@ -5,10 +5,14 @@
 {% block title %}Dashboard | {{ block.super }}{% endblock %}
 
 {% block content %}
-
+    <style>
+        .grids_of_3 p{
+            font-size: medium;
+        }
+    </style>
     <div class="wrap" xmlns="http://www.w3.org/1999/html" >
 	<!-- start grids_of_3 -->
-    <h2 style="color: white; font-size: 40px; text-align: center; padding-top: 20px;">Welcome Back {% if user.first_name != "" %}{{ user.first_name }} {{ user.last_name }} {% else %}  {{ user.username }}{% endif %}!</h2>
+    <h2 style="color: white; font-size: 40px; text-align: center; padding-top: 20px;">Welcome Back {% if user.first_name != "" %}{{ user.first_name }} {{ user.last_name }} {% else %} {{ user.username }}{% endif %}!</h2>
 	<div class="grids_of_3" id="sortable">
 		<div class="grid1_of_3" >
 			<div class="btn_style bg4">
@@ -21,10 +25,9 @@
                     <a href="#">
                         <div>
                         <h4 class="list-group-item-heading">
-                            <span class="pull-right medium"><time  datetime="{{ thought.recorded_at }}">{{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}</time></span>
-                            {{ thought.get_condition_display }}
-                        </h4>
-                    {% if thought.notes %} {{ thought.notes|linebreaks }} {% endif %}
+                            <span class="pull-right medium"><time  datetime="{{ thought.recorded_at }}">{{ thought.recorded_at|date:"SHORT_DATE_FORMAT" }}</time></span></h4>
+                            <h2 style="font-size: 25px;">{{ thought.get_condition_display }}</h2>
+                            {% if thought.notes %}<p style="font-size:10px;"> {{ thought.notes|linebreaks }} </p>{% endif %}
                     </div>
                     <div class="clear"></div></a>
                     </li>

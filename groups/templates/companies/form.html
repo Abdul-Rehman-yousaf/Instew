@@ -60,9 +60,13 @@
 			<form action="" method="POST" class="login_form">
                     {% bootstrap_form form %}
                     {% csrf_token %}
+                    {% if object %}
+                    <input type="submit" value="Save" class="pull-right btn btn-primary btn-lg">
+                    {% else %}
                     <input type="submit" value="Create" class="pull-right btn btn-primary btn-lg">
+                    {%  endif %}
                 <br>
-                </form>
+            </form>
 		</div>
     </div>
         <div class="grid1_of_3 left">

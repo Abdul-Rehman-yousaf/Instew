@@ -11,7 +11,7 @@ from .. import models
 
 
 class Create(LoginRequiredMixin, SetHeadlineMixin, generic.CreateView):
-    form_class = forms.CompanyForm
+    form_class = forms.FamilyForm
     headline = 'Create Family'
     success_url = reverse_lazy('users:dashboard')
     template_name = 'families/form.html'
@@ -28,7 +28,7 @@ class Update(LoginRequiredMixin, SetHeadlineMixin, generic.UpdateView):
     template_name = 'families/form.html'
 
     def get_queryset(self):
-        return self.request.user.companies.all()
+        return self.request.user.families.all()
 
     def get_headline(self):
         return f'Edit {self.object.name}'
