@@ -13,10 +13,27 @@
         body{
             padding-bottom:3%;
         }
-    h4{
-        text-transform:lowercase;
-        font-family: Arial;
-    }
+        h4{
+            text-transform:lowercase;
+            font-family: Arial;
+        }
+        #act_btns{
+            padding-top:2%;
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+        #act_btns a{
+            display:inline;
+            background:none;
+            padding: 0;
+        }
+        #act_btns a:hover{
+            border-left: none;
+        }
+        #act_btns button{
+            width:4em;
+            height:3em;
+        }
     </style>
 
     <div class="grid1_of_3">
@@ -27,22 +44,18 @@
             <ul>
                 {% for invite in object_list %}
                         <li>
-                            <span class="pull-right" style="padding-top: 2%; padding-right: 2%">
-                                <button href="{% url 'groups:families:invite_response' code=invite.uuid response='accept' %}" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i></button>
-                                <button href="{% url 'groups:families:invite_response' code=invite.uuid response='reject' %}" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+                            <span class="pull-right" style="padding-top: 2%; padding-right: 2%" id="act_btns">
+                                <a href="{% url 'groups:families:invite_response' code=invite.uuid response='accept' %}" ><button class="btn btn-success"><i class="glyphicon glyphicon-ok center-block"></i></button></a>
+                                <a href="{% url 'groups:families:invite_response' code=invite.uuid response='reject' %}" ><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button></a>
                             </span>
                             <a href="#">{{ invite.family }} by {{ invite.from_user }} </a></li>
                     {% empty %}
-                        <li><p style="text-align: center; padding-top: 4%; padding-bottom: 4%; font-size: x-large"> You don't have any Invitations...! </p></li>
+                        <li><p style="text-align: center; padding-top: 4%; padding-bottom: 4%; font-size: x-large"> You don't have any Invitation...! </p></li>
                     {% endfor %}
             </ul>
             <div class="clear"></div>
         </div>
     </div>
 
-
-
-
     <div class="container pt"></div>
-
 {% endblock %}

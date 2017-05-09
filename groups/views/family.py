@@ -11,7 +11,7 @@ from .. import models
 
 
 class Create(LoginRequiredMixin, SetHeadlineMixin, generic.CreateView):
-    form_class = forms.FamilyForm
+    form_class = forms.CompanyForm
     headline = 'Create Family'
     success_url = reverse_lazy('users:dashboard')
     template_name = 'families/form.html'
@@ -28,7 +28,7 @@ class Update(LoginRequiredMixin, SetHeadlineMixin, generic.UpdateView):
     template_name = 'families/form.html'
 
     def get_queryset(self):
-        return self.request.user.families.all()
+        return self.request.user.companies.all()
 
     def get_headline(self):
         return f'Edit {self.object.name}'
@@ -38,11 +38,37 @@ class Update(LoginRequiredMixin, SetHeadlineMixin, generic.UpdateView):
             'slug': self.object.slug})
 
 
-class Detail(LoginRequiredMixin, generic.DetailView):
+class Detail(LoginRequiredMixin, generic.FormView):
+    form_class = forms.FamilyInviteForm
     template_name = 'families/detail.html'
+
+    def get_success_url(self):
+        self.get_object()
+        return reverse('groups:families:detail', kwargs={
+            'slug': self.object.slug})
 
     def get_queryset(self):
         return self.request.user.families.all()
+
+    def get_object(self):
+        self.object = self.request.user.families.get(
+            slug=self.kwargs.get('slug')
+        )
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = self.get_object()
+        return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        models.FamilyInvite.objects.create(
+            from_user=self.request.user,
+            to_user=form.invitee,
+            family=self.get_object()
+        )
+        return response
 
 
 class Leave(LoginRequiredMixin, SetHeadlineMixin, generic.FormView):
@@ -94,4 +120,3 @@ class InviteResponse(LoginRequiredMixin, generic.RedirectView):
         invite.save()
 
         return super().get(request, *args, **kwargs)
-
